@@ -7,12 +7,12 @@ dotenv.config();
 
 // Define a function for logging in a user
 
-const logUser = async (request, response) => {
+const login = async (request, response) => {
   const { email, password } = request.body;
   // Write a SQL query to retrieve the user with the given email address
 
   // Execute the SQL query
-  const result = await pool.query(`SELECT * FROM "Login" WHERE email = $1`, [
+  const result = await pool.query(`SELECT * FROM "login" WHERE email = $1`, [
     email,
   ]);
 
@@ -24,6 +24,7 @@ const logUser = async (request, response) => {
   // If the user exists, get the user data
 
   const user = result.rows[0];
+  console.log(user,"user result rows")
 
   // Verify that the password provided by the user matches the password stored in the database
   // This example uses bcrypt to hash and compare the passwords
@@ -45,11 +46,13 @@ const logUser = async (request, response) => {
   return response
     .cookie("access_token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
+      // secure: process.env.NODE_ENV === "production",
     })
     .status(200)
-    .send(`Logged in successfully with email ${email}`);
+    .send({message:`Logged in successfully with `,
+            id:`${user.id}`,
+            email:`${email}`,
+            token:`${token}`});
 };
 
-
-export default logUser;
+export default login;

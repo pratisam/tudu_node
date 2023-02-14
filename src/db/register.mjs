@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { pool } from "./connectDb.mjs";
 
 const register = async(req,res) => {
-    const { email , password,username,firstname,secondname,style,rewards,coins} = req.body
+    const { email , password,username,firstname,secondname} = req.body
     console.log(req.body)
         try {
             const  data  =  await pool.query(`SELECT * FROM login WHERE email = $1;`, [email]); 
@@ -21,16 +21,18 @@ const register = async(req,res) => {
                 res.status(err).json({
                     error: "Server error",
                 });
-            const queryValues  = {
+            const queryValues = [
                 email,
-                password,
+                hash,
                 username,
                 firstname,
                 secondname,
-                style,
-                rewards,
-                coins
-            };
+                null,
+                null,
+                null
+            ]
+                
+            
     
             let flag  =  1; 
             //Declaring a flag
@@ -46,7 +48,7 @@ const register = async(req,res) => {
               FROM ins;
           `;
             pool
-            .query(sqlQuery, Object.values(queryValues),(error, results) => {
+            .query(sqlQuery, queryValues,(error, results) => {
                 if (err) {
                     flag  =  0; 
                     //If user is not inserted is not inserted to database assigning flag as 0/false.
