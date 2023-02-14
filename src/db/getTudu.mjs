@@ -14,9 +14,8 @@ export const getTudu = async(req, res) => {
             }
             else
             res.send(getValues.rows);
-    } catch (err) {
-        console.error(err)
-        return err.status(500).send({error:"internal server error"})
-    }
-  
+    } catch (error) {
+        console.error(error)
+        res.status(500).send({error:"internal server error"})
+    } 
 }

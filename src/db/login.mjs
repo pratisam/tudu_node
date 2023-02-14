@@ -18,8 +18,10 @@ const login = async (request, response) => {
 
   // If the user does not exist, return an error
   if (result.rows.length === 0) {
-     response.json({ error: "User not found" });
-     return response.status(404).send("user not registered")
+    //  response.json({ error: "User not found" });
+     return response
+      .status(404)
+      .send("user not registered")
   }
   // If the user exists, get the user data
 
@@ -32,8 +34,10 @@ const login = async (request, response) => {
 
   // If the password is invalid, return an error
   if (!passwordIsValid) {
-    response.json( {error: "Invalid password"} );
-    return res.send("Invalid Password")
+    // response.json( {error: "Invalid password"} );
+    return response
+      .status(403)
+      .send("Invalid Password")
   }
 
   // If the password is valid, generate a JWT that encodes the user's information
