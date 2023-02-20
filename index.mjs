@@ -8,6 +8,8 @@ import login from "./src/db/login.mjs";
 import addTudu from "./src/db/addTudu.mjs";
 import jwtAuthentification from "./src/middleware/jwtAuth.mjs";
 import { getTudu } from "./src/db/getTudu.mjs";
+import { filterTudu } from "./src/db/filterTudu.mjs";
+import { isDone } from "./src/db/isDone.mjs";
 const app = Express();
 dbConnect()
 // connecting to db
@@ -47,6 +49,11 @@ app.post('/personal/addTudu',addTudu)
 //Get a Tudu task
 app.get("/user/getTudu/:id",getTudu)
 
+//filter a tudu
+app.get('/user/getTudu/:id/:category',filterTudu)
+
+//update a tudu
+app.patch('/user/updateTudu/:id',isDone)
 const port = 4000
 app.listen(port, () => {
     console.log(`Here we go, Engines started at ${port}.`);
