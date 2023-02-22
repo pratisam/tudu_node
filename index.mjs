@@ -1,5 +1,6 @@
 import cookieParser from "cookie-parser";
 import cors from 'cors';
+import dotenv from 'dotenv';
 import Express from "express";
 import bodyParser from "body-parser";
 import { dbConnect } from "./src/db/connectTodb.mjs";
@@ -15,13 +16,13 @@ import { filterActive } from "./src/db/filterActive.mjs";
 import { editTudu } from "./src/db/editTudu.mjs";
 import { deleteTudu } from "./src/db/deleteTudu.mjs";
 const app = Express();
+dotenv.config();
 dbConnect()
 // connecting to db
 
 //connecting to express
 app.use(Express.json());
 app.use(cookieParser())
-
 
 
 // CORS configuration options
@@ -67,8 +68,9 @@ app.patch('/user/editTudu/:id',editTudu)
 
 //delete a tudu
 app.delete('/user/deleteTudu/:id',deleteTudu)
-const port = 4000
-app.listen(port, () => {
-    console.log(`Here we go, Engines started at ${port}.`);
+
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+    console.log(`Here we go, Engines started at ${PORT}`);
 })
 
