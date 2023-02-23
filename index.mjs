@@ -72,8 +72,8 @@ app.patch('/user/editTudu/:id',editTudu)
 
 //delete a tudu
 app.delete('/user/deleteTudu/:id',deleteTudu)
-const port = 4000
-app.listen(port, () => {
-    console.log(`Here we go, Engines started at ${port}.`);
+const PORT = process.env.PORT
+app.listen(PORT || 4001, () => {
+    console.log(`Here we go, Engines started at ${PORT}.`);
 })
 
