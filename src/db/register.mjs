@@ -3,7 +3,8 @@ import jwt from "jsonwebtoken";
 import { pool } from "./connectDb.mjs";
 
 const register = async(req,res) => {
-    const { email , password,username,firstname,lastname} = req.body
+
+    const { email, password, username,firstName,secondName} = req.body
     console.log(req.body)
         try {
             const  data  =  await pool.query(`SELECT * FROM login WHERE email = $1;`, [email]); 
@@ -25,8 +26,8 @@ const register = async(req,res) => {
                 email,
                 hash,
                 username,
-                firstname,
-                lastname,
+                firstName,
+                secondName,
                 null,
                 null,
                 null
