@@ -14,12 +14,17 @@ import { isDone } from "./src/db/isDone.mjs";
 import { filterActive } from "./src/db/filterActive.mjs";
 import { editTudu } from "./src/db/editTudu.mjs";
 import { deleteTudu } from "./src/db/deleteTudu.mjs";
+import dotenv from 'dotenv'
+
+dotenv.config();
+// console.log(process.env.PORT,"port")
 const app = Express();
 dbConnect()
 // connecting to db
 
 //connecting to express
 app.use(Express.json());
+// app.use(cookieParser(process.env.JWT_SECRET))
 app.use(cookieParser())
 
 
