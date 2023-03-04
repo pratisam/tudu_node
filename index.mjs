@@ -32,7 +32,7 @@ app.use(cookieParser())
 // CORS configuration options
 
 // Use the CORS middleware
-app.use(cors({origin:['http://localhost:3000','https://tudu-bcode.netlify.app/']}));
+app.use(cors({origin:['https://tudu-bcode.netlify.app/','http://localhost:3000']}));
 
 app.use(
     bodyParser.urlencoded({
